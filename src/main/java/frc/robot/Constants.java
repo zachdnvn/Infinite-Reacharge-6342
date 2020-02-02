@@ -24,7 +24,7 @@ public final class Constants {
         public static final double rollerspeed = 1.0;
     }
     public static final class OI {
-        public static final int kDriverControllerPort = 1;
+        public static final int kDriverControllerPort = 0;
 		public static final int kOperatorControllerPort = 2;
     }
 }
