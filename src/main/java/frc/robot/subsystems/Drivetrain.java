@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
+
   WPI_TalonFX leftFrontTalon;
   WPI_TalonFX leftBackTalon;
   WPI_TalonFX rightFrontTalon;
@@ -36,10 +37,6 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
     differentialDrive.arcadeDrive(moveSpeed * DriveConstants.speedscalar, rotateSpeed * DriveConstants.rotatescalar);
   }
-
-  // public void curvatureDrive(double moveSpeed, double rotateSpeed){
-  //   differentialDrive.curvatureDrive(moveSpeed, rotateSpeed, drivestick.GetButton(1));
-  // }
 
   @Override
   public void periodic() {

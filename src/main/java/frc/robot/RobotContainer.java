@@ -23,15 +23,19 @@ public class RobotContainer {
 //Subsystems
   private final Drivetrain m_robotDrive = new Drivetrain();
   private final Intake m_intake = new Intake();
+//Comands
   
 //Joysticks
   Joystick m_driveJoystick = new Joystick(OI.kDriverControllerPort); 
   Joystick m_operatorJoystick = new Joystick(OI.kOperatorControllerPort);
 
+
   public RobotContainer() {
-    // Configure the button bindings
+
+    //Configure Button Bindings
     configureButtonBindings();
 
+    //Default Commands
     m_robotDrive.setDefaultCommand(
       new RunCommand(() -> m_robotDrive
       .arcadeDrive(m_driveJoystick.getY(GenericHID.Hand.kLeft), 
@@ -50,13 +54,5 @@ public class RobotContainer {
 public Command getAutonomousCommand() {
 	return null;
 }
-
-
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
 
 }
