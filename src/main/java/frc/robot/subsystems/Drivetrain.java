@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -32,10 +31,12 @@ public class Drivetrain extends SubsystemBase {
       leftBackTalon.follow(leftFrontTalon);
       rightBackTalon.follow(rightFrontTalon);
 
+      differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
+
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
-    differentialDrive.arcadeDrive(moveSpeed * DriveConstants.speedscalar, rotateSpeed * DriveConstants.rotatescalar);
+    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
   @Override

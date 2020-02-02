@@ -7,14 +7,17 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OI;
+import frc.robot.commands.IntakeIn;
+import frc.robot.commands.IntakeOut;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
@@ -23,10 +26,13 @@ public class RobotContainer {
 //Subsystems
   private final Drivetrain m_robotDrive = new Drivetrain();
   private final Intake m_intake = new Intake();
+
 //Comands
-  
+  private final Command IntakeIn = new IntakeIn(m_intake);
+  private final Command IntakeOut = new IntakeOut(m_intake);
+
 //Joysticks
-  Joystick m_driveJoystick = new Joystick(OI.kDriverControllerPort); 
+  XboxController m_driveJoystick = new XboxController(OI.kDriverControllerPort); 
   Joystick m_operatorJoystick = new Joystick(OI.kOperatorControllerPort);
 
 
@@ -37,18 +43,24 @@ public class RobotContainer {
 
     //Default Commands
     m_robotDrive.setDefaultCommand(
-      new RunCommand(() -> m_robotDrive
-      .arcadeDrive(m_driveJoystick.getY(GenericHID.Hand.kLeft), 
-                   m_driveJoystick.getX(GenericHID.Hand.kRight)), m_robotDrive));
+        new RunCommand(() -> m_robotDrive
+            .arcadeDrive(m_driveJoystick.getY(Hand.kLeft),
+                         m_driveJoystick.getX(Hand.kRight)), m_robotDrive));
+    // m_intake.setDefaultCommand(
+    //     new RunCommand(() -> m_intake
+    //     .IntakeStop(), m_intake));
   }
 
   private void configureButtonBindings() {
 
-    new JoystickButton(m_operatorJoystick, Button.kBumperLeft.value)
-      .whenHeld(new InstantCommand(m_intake::IntakeIn, m_intake));
-
     new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
-      .whenHeld(new InstantCommand(m_intake::IntakeOut, m_intake));
+      .whileHeld(new IntakeIn(m_intake));
+
+    new JoystickButton(m_operatorJoystick, Button.kBumperLeft.value)
+      .whileHeld(new IntakeOut(m_intake));
+
+    // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
+    //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));
   }
 
 public Command getAutonomousCommand() {
