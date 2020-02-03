@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OI;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
+import frc.robot.commands.driveArcade;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
@@ -32,8 +33,8 @@ public class RobotContainer {
   private final Command IntakeOut = new IntakeOut(m_intake);
 
 //Joysticks
-  XboxController m_driveJoystick = new XboxController(OI.kDriverControllerPort); 
-  Joystick m_operatorJoystick = new Joystick(OI.kOperatorControllerPort);
+  public XboxController m_driveJoystick = new XboxController(OI.kDriverControllerPort); 
+  public Joystick m_operatorJoystick = new Joystick(OI.kOperatorControllerPort);
 
 
   public RobotContainer() {
@@ -42,10 +43,12 @@ public class RobotContainer {
     configureButtonBindings();
 
     //Default Commands
-    m_robotDrive.setDefaultCommand(
-        new RunCommand(() -> m_robotDrive
-            .arcadeDrive(m_driveJoystick.getY(Hand.kLeft),
-                         m_driveJoystick.getX(Hand.kRight)), m_robotDrive));
+
+    //Default Drivetrain Command
+    m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
+    ()->m_driveJoystick.getY(Hand.kLeft),
+    ()->m_driveJoystick.getX(Hand.kRight))
+    );
     // m_intake.setDefaultCommand(
     //     new RunCommand(() -> m_intake
     //     .IntakeStop(), m_intake));
