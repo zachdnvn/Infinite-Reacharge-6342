@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OI;
 import frc.robot.commands.IntakeIn;
@@ -29,8 +28,8 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
 
 //Comands
-  private final Command IntakeIn = new IntakeIn(m_intake);
-  private final Command IntakeOut = new IntakeOut(m_intake);
+//  private final Command IntakeIn = new IntakeIn(m_intake);
+//  private final Command IntakeOut = new IntakeOut(m_intake);
 
 //Joysticks
   public XboxController m_driveJoystick = new XboxController(OI.kDriverControllerPort); 
@@ -55,7 +54,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-
     new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
       .whileHeld(new IntakeIn(m_intake));
 
