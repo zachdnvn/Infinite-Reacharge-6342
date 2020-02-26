@@ -16,11 +16,13 @@ public class driveArcade extends CommandBase {
   private final Drivetrain m_arcadian_Drive;
   private final DoubleSupplier m_movement;    
   private final DoubleSupplier m_rotation;
+  private final boolean m_gear;
 
-  public driveArcade(Drivetrain subsystem, DoubleSupplier movement, DoubleSupplier rotation) {
+  public driveArcade(Drivetrain subsystem, DoubleSupplier movement, DoubleSupplier rotation, Boolean gear) {
       m_arcadian_Drive = subsystem;
       m_movement = movement;
       m_rotation = rotation;
+      m_gear = gear;
       addRequirements(m_arcadian_Drive);
   }
 
@@ -32,8 +34,8 @@ public class driveArcade extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // This is the command version of the arcade drive command
     m_arcadian_Drive.arcadeDrive(m_movement.getAsDouble(), m_rotation.getAsDouble());
+    m_arcadian_Drive.setGear(.getAButton());
   }
 
   // Called once the command ends or is interrupted.

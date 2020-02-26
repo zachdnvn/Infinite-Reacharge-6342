@@ -47,6 +47,7 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
     ()->m_driveJoystick.getY(Hand.kLeft),
     ()->m_driveJoystick.getX(Hand.kRight))
+    ()->m_driveJoystick.
     );
     // m_intake.setDefaultCommand(
     //     new RunCommand(() -> m_intake
@@ -59,6 +60,7 @@ public class RobotContainer {
 
     new JoystickButton(m_operatorJoystick, Button.kBumperLeft.value)
       .whileHeld(new IntakeOut(m_intake));
+
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
     //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));

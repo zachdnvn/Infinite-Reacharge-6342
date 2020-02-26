@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,6 +21,8 @@ public class Drivetrain extends SubsystemBase {
   WPI_TalonFX rightBackTalon;
 
   DifferentialDrive differentialDrive;
+
+  Solenoid m_gearShiftSolenoid;
 
   public Drivetrain() {
 
@@ -33,6 +36,11 @@ public class Drivetrain extends SubsystemBase {
 
       differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 
+      m_gearShiftSolenoid = new Solenoid(0);
+  }
+
+  public void setGear(boolean gear){
+    m_gearShiftSolenoid.set(gear);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
