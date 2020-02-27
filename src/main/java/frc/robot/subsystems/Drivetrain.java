@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -20,31 +22,59 @@ public class Drivetrain extends SubsystemBase {
   WPI_TalonFX rightFrontTalon;
   WPI_TalonFX rightBackTalon;
 
+  NeutralMode nMode = NeutralMode.Coast;
+
   DifferentialDrive differentialDrive;
 
   Solenoid m_gearShiftSolenoid;
 
   public Drivetrain() {
 
-      leftFrontTalon = new WPI_TalonFX(10);
-      leftBackTalon = new WPI_TalonFX(11);
-      rightFrontTalon = new WPI_TalonFX(12);
-      rightBackTalon = new WPI_TalonFX(13);
-      
-      leftBackTalon.follow(leftFrontTalon);
-      rightBackTalon.follow(rightFrontTalon);
+    leftFrontTalon = new WPI_TalonFX(10);
+    leftBackTalon = new WPI_TalonFX(11);
+    rightFrontTalon = new WPI_TalonFX(12);
+    rightBackTalon = new WPI_TalonFX(13);
 
-      differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
+    leftBackTalon.follow(leftFrontTalon);
+    rightBackTalon.follow(rightFrontTalon);
 
-      m_gearShiftSolenoid = new Solenoid(0);
+    differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
+
+    m_gearShiftSolenoid = new Solenoid(0);
   }
 
-  public void setGear(boolean gear){
+  public void initTalons() {
+    // Front Left
+    leftFrontTalon.clearStickyFaults();
+    leftFrontTalon.configFactoryDefault();
+    leftFrontTalon.setNeutralMode(nMode);
+    // Front Right
+    rightFrontTalon.clearStickyFaults();
+    rightFrontTalon.configFactoryDefault();
+    rightFrontTalon.setNeutralMode(nMode);
+    // Back Left
+    leftBackTalon.clearStickyFaults();
+    leftBackTalon.configFactoryDefault();
+    // Back Right
+    rightBackTalon.clearStickyFaults();
+    rightBackTalon.configFactoryDefault();
+  }
+
+  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+  }
+
+  public void setGear(boolean gear) {
     m_gearShiftSolenoid.set(gear);
   }
 
-  public void arcadeDrive(double moveSpeed, double rotateSpeed){
-    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+  public boolean getGear() {
+    return m_gearShiftSolenoid.get();
+  }
+
+  public void safeStop() {
+    leftFrontTalon.set(ControlMode.PercentOutput, 0);
+    rightFrontTalon.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

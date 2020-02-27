@@ -18,6 +18,7 @@ import frc.robot.Constants.OI;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.driveArcade;
+import frc.robot.commands.shiftGears;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
@@ -46,8 +47,8 @@ public class RobotContainer {
     //Default Drivetrain Command
     m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
     ()->m_driveJoystick.getY(Hand.kLeft),
-    ()->m_driveJoystick.getX(Hand.kRight))
-    ()->m_driveJoystick.
+    ()->m_driveJoystick.getX(Hand.kRight), 
+    true) // THIS IS A VERY IMPORTANT LINE, THE CONSTRUCTOR REQUIRES A BOOLEAN VALUE SO YOU NEED TO DECIDE HOW YOU WOULD LIKE TO DETERMINE THE GEAR BOOLEAN
     );
     // m_intake.setDefaultCommand(
     //     new RunCommand(() -> m_intake
@@ -61,6 +62,8 @@ public class RobotContainer {
     new JoystickButton(m_operatorJoystick, Button.kBumperLeft.value)
       .whileHeld(new IntakeOut(m_intake));
 
+    new JoystickButton(m_driveJoystick, 2) // CHANGE BUTTON NUMBER AS NEEDED
+    .whenPressed(new shiftGears(m_robotDrive));
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
     //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));
