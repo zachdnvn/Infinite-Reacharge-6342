@@ -27,7 +27,9 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrive differentialDrive;
 
-  public DoubleSolenoid m_gearShiftSolenoid;
+  DoubleSolenoid m_gearShiftSolenoid;
+
+  Boolean currentGear = true; // CHANGE THIS BASED ON THE GEAR YOU ARE STARTING ON
 
   public Drivetrain() {
 
@@ -64,17 +66,15 @@ public class Drivetrain extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
-
-  public void setHigh(){
-    m_gearShiftSolenoid.set(Value.kForward);
-  }
-
-  public void setLow(){
-    m_gearShiftSolenoid.set(Value.kReverse);
-  }
-
-  public Value getGear() {
-    return m_gearShiftSolenoid.get();
+  
+  public void changeGear() {
+    currentGear = !currentGear;
+    if(currentGear == true) {
+      m_gearShiftSolenoid.set(Value.kReverse);
+    }
+    else {
+      m_gearShiftSolenoid.set(Value.kForward);
+    }
   }
 
   public void safeStop() {

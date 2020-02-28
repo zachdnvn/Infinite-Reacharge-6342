@@ -7,18 +7,14 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;;
 
 public class shiftGears extends CommandBase {
   private final Drivetrain m_arcadian_Drive;
-  private final DoubleSolenoid.Value currentGear;
 
   public shiftGears(Drivetrain subsystem) {
     m_arcadian_Drive = subsystem;
-    currentGear = m_arcadian_Drive.getGear();
     addRequirements(m_arcadian_Drive);
   }
 
@@ -30,11 +26,7 @@ public class shiftGears extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (currentGear == Value.kForward) {
-      m_arcadian_Drive.m_gearShiftSolenoid.set(Value.kReverse);
-    } else {
-      m_arcadian_Drive.m_gearShiftSolenoid.set(Value.kForward);
-    }
+    m_arcadian_Drive.changeGear();
   }
 
   // Called once the command ends or is interrupted.
