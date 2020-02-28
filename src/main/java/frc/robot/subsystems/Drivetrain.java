@@ -73,10 +73,6 @@ public class Drivetrain extends SubsystemBase {
     m_gearShiftSolenoid.set(Value.kReverse);
   }
 
-  // public void setGear(boolean gear) {
-  //   m_gearShiftSolenoid.set(gear);
-  // }
-
   public Value getGear() {
     return m_gearShiftSolenoid.get();
   }

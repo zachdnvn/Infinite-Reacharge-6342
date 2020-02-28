@@ -47,8 +47,7 @@ public class RobotContainer {
     //Default Drivetrain Command
     m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
     ()->m_driveJoystick.getY(Hand.kLeft),
-    ()->m_driveJoystick.getX(Hand.kRight), 
-    true) // THIS IS A VERY IMPORTANT LINE, THE CONSTRUCTOR REQUIRES A BOOLEAN VALUE SO YOU NEED TO DECIDE HOW YOU WOULD LIKE TO DETERMINE THE GEAR BOOLEAN
+    ()->m_driveJoystick.getX(Hand.kRight)) 
     );
   }
 

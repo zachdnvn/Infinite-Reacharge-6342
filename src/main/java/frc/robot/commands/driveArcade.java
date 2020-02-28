@@ -16,13 +16,11 @@ public class driveArcade extends CommandBase {
   private final Drivetrain m_arcadian_Drive;
   private final DoubleSupplier m_movement;    
   private final DoubleSupplier m_rotation;
-  private final boolean m_gear;
 
-  public driveArcade(Drivetrain subsystem, DoubleSupplier movement, DoubleSupplier rotation, Boolean gear) {
+  public driveArcade(Drivetrain subsystem, DoubleSupplier movement, DoubleSupplier rotation) {
       m_arcadian_Drive = subsystem;
       m_movement = movement;
       m_rotation = rotation;
-      m_gear = gear;
       addRequirements(m_arcadian_Drive);
   }
 
@@ -36,7 +34,6 @@ public class driveArcade extends CommandBase {
   @Override
   public void execute() {
     m_arcadian_Drive.arcadeDrive(m_movement.getAsDouble(), m_rotation.getAsDouble());
-    m_arcadian_Drive.setGear(m_gear);
   }
 
   // Called once the command ends or is interrupted.
