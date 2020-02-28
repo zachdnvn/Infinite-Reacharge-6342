@@ -31,16 +31,15 @@ public class shiftGears extends CommandBase {
   @Override
   public void execute() {
     if (currentGear == Value.kForward) {
-      m_arcadian_Drive.setLow();
+      m_arcadian_Drive.m_gearShiftSolenoid.set(Value.kReverse);
     } else {
-      m_arcadian_Drive.setHigh();
+      m_arcadian_Drive.m_gearShiftSolenoid.set(Value.kForward);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
   }
 
   // Returns true when the command should end.

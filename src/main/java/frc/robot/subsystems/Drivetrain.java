@@ -27,7 +27,7 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrive differentialDrive;
 
-  DoubleSolenoid m_gearShiftSolenoid;
+  public DoubleSolenoid m_gearShiftSolenoid;
 
   public Drivetrain() {
 
