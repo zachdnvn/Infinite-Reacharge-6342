@@ -50,19 +50,16 @@ public class RobotContainer {
     ()->m_driveJoystick.getX(Hand.kRight), 
     true) // THIS IS A VERY IMPORTANT LINE, THE CONSTRUCTOR REQUIRES A BOOLEAN VALUE SO YOU NEED TO DECIDE HOW YOU WOULD LIKE TO DETERMINE THE GEAR BOOLEAN
     );
-    // m_intake.setDefaultCommand(
-    //     new RunCommand(() -> m_intake
-    //     .IntakeStop(), m_intake));
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
+    new JoystickButton(m_operatorJoystick, Button.kY.value)
       .whileHeld(new IntakeIn(m_intake));
 
-    new JoystickButton(m_operatorJoystick, Button.kBumperLeft.value)
+    new JoystickButton(m_operatorJoystick, Button.kA.value)
       .whileHeld(new IntakeOut(m_intake));
 
-    new JoystickButton(m_driveJoystick, 2) // CHANGE BUTTON NUMBER AS NEEDED
+    new JoystickButton(m_driveJoystick, Button.kBumperRight.value) // CHANGE BUTTON NUMBER AS NEEDED
     .whenPressed(new shiftGears(m_robotDrive));
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)

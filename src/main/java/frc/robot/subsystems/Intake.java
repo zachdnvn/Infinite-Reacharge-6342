@@ -15,6 +15,7 @@ import frc.robot.Constants.IntakeConstants;
 public class Intake extends SubsystemBase {
   WPI_TalonSRX intakeTalon = new WPI_TalonSRX(14);
 
+  
   public void IntakeIn(){
     intakeTalon.set(IntakeConstants.rollerspeed);
   }

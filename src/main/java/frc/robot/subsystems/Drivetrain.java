@@ -11,7 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,7 +27,7 @@ public class Drivetrain extends SubsystemBase {
 
   DifferentialDrive differentialDrive;
 
-  Solenoid m_gearShiftSolenoid;
+  DoubleSolenoid m_gearShiftSolenoid;
 
   public Drivetrain() {
 
@@ -40,7 +41,7 @@ public class Drivetrain extends SubsystemBase {
 
     differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 
-    m_gearShiftSolenoid = new Solenoid(0);
+    m_gearShiftSolenoid = new DoubleSolenoid(1,2);
   }
 
   public void initTalons() {
@@ -64,11 +65,19 @@ public class Drivetrain extends SubsystemBase {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
-  public void setGear(boolean gear) {
-    m_gearShiftSolenoid.set(gear);
+  public void setHigh(){
+    m_gearShiftSolenoid.set(Value.kForward);
   }
 
-  public boolean getGear() {
+  public void setLow(){
+    m_gearShiftSolenoid.set(Value.kReverse);
+  }
+
+  // public void setGear(boolean gear) {
+  //   m_gearShiftSolenoid.set(gear);
+  // }
+
+  public Value getGear() {
     return m_gearShiftSolenoid.get();
   }
 
