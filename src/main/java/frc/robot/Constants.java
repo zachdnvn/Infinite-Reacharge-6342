@@ -28,4 +28,7 @@ public final class Constants {
         public static final int kDriverControllerPort = 0;
 		public static final int kOperatorControllerPort = 1;
     }
+    public static final class ShooterConstants{
+        public static final double rollerspeed = 1.0;
+    }
 }

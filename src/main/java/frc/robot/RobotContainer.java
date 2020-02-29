@@ -59,7 +59,7 @@ public class RobotContainer {
       .whileHeld(new IntakeOut(m_intake));
 
     new JoystickButton(m_driveJoystick, Button.kBumperRight.value) // CHANGE BUTTON NUMBER AS NEEDED
-    .whenPressed(new shiftGears(m_robotDrive));
+    .whenReleased(new shiftGears(m_robotDrive));
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
     //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));
@@ -68,5 +68,4 @@ public class RobotContainer {
 public Command getAutonomousCommand() {
 	return null;
 }
-
 }
