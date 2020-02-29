@@ -19,14 +19,17 @@ import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.driveArcade;
 import frc.robot.commands.shiftGears;
+import frc.robot.commands.shoot;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
 
 //Subsystems
   private final Drivetrain m_robotDrive = new Drivetrain();
   private final Intake m_intake = new Intake();
+  private final Shooter m_shooter = new Shooter();
 
 //Comands
 //  private final Command IntakeIn = new IntakeIn(m_intake);
@@ -60,6 +63,9 @@ public class RobotContainer {
 
     new JoystickButton(m_driveJoystick, Button.kBumperRight.value) // CHANGE BUTTON NUMBER AS NEEDED
     .whenReleased(new shiftGears(m_robotDrive));
+
+    new JoystickButton(m_operatorJoystick, Button.kStickRight.value)
+    .whenHeld(new shoot(m_shooter));
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
     //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));

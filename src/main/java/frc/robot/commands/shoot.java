@@ -8,12 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.shooter;
+import frc.robot.subsystems.Shooter;
 
 public class shoot extends CommandBase {
-  private final shooter m_shooter;
+  private final Shooter m_shooter;
 
-  public shoot(shooter) {
+  public shoot(Shooter subsystem) {
    m_shooter = subsystem;
    addRequirements(m_shooter);
   }
@@ -21,6 +21,7 @@ public class shoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_shooter.shoot();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,6 +32,7 @@ public class shoot extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_shooter.safeStop();
   }
 
   // Returns true when the command should end.
