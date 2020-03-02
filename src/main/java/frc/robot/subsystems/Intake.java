@@ -21,8 +21,8 @@ public class Intake extends SubsystemBase {
   Boolean intake_SolenoidState = true; // SUBJECT TO CHANGE BASED ON STARTING POSITION
 
   public Intake() {
-    intakeTalon = new WPI_TalonSRX(14);
-    m_intake_Solenoid = new DoubleSolenoid(13, 14); // ID'S ARE SUBJECT TO CHANGE
+    intakeTalon = new WPI_TalonSRX(9);
+    m_intake_Solenoid = new DoubleSolenoid(3,5);
   }
 
   public void changeIntake() {

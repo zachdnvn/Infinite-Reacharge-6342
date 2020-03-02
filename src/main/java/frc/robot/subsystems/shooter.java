@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
     leftShooterTalon = new WPI_TalonSRX(14);
     rightShooterTalon = new WPI_TalonSRX(15);
     
-    leftShooterTalon.follow(rightShooterTalon);
+  //  leftShooterTalon.follow(rightShooterTalon);
 
   }
 
@@ -34,6 +34,7 @@ public class Shooter extends SubsystemBase {
     leftShooterTalon.clearStickyFaults();
     leftShooterTalon.configFactoryDefault();
     leftShooterTalon.setNeutralMode(nMode);
+    leftShooterTalon.follow(rightShooterTalon);
     // Right Shooter Talon
     rightShooterTalon.clearStickyFaults();
     rightShooterTalon.configFactoryDefault();
@@ -42,6 +43,7 @@ public class Shooter extends SubsystemBase {
 
   public void shoot(){
     rightShooterTalon.set(ShooterConstants.rollerspeed);
+    leftShooterTalon.set(ShooterConstants.rollerspeed * -1);
   }
   public void safeStop() {
     leftShooterTalon.set(ControlMode.PercentOutput, 0);
