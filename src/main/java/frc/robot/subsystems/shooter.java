@@ -35,6 +35,7 @@ public class Shooter extends SubsystemBase {
     leftShooterTalon.configFactoryDefault();
     leftShooterTalon.setNeutralMode(nMode);
     leftShooterTalon.follow(rightShooterTalon);
+    leftShooterTalon.setInverted(true);
     // Right Shooter Talon
     rightShooterTalon.clearStickyFaults();
     rightShooterTalon.configFactoryDefault();
@@ -43,7 +44,6 @@ public class Shooter extends SubsystemBase {
 
   public void shoot(){
     rightShooterTalon.set(ShooterConstants.rollerspeed);
-    leftShooterTalon.set(ShooterConstants.rollerspeed * -1);
   }
   public void safeStop() {
     leftShooterTalon.set(ControlMode.PercentOutput, 0);
