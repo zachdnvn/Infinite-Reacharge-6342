@@ -64,7 +64,7 @@ public class RobotContainer {
     new JoystickButton(m_driveJoystick, Button.kBumperRight.value) // CHANGE BUTTON NUMBER AS NEEDED
     .whenReleased(new shiftGears(m_robotDrive));
 
-    new JoystickButton(m_operatorJoystick, Button.kStickRight.value)
+    new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
     .whenHeld(new shoot(m_shooter));
 
     // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
