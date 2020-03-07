@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.IndexerConstants;
 
 public class Indexer extends SubsystemBase {
 
@@ -29,14 +30,14 @@ public class Indexer extends SubsystemBase {
   }
 
   public void initTalons() {
-    // Front Left
     indexerTalon.clearStickyFaults();
     indexerTalon.configFactoryDefault();
     indexerTalon.setNeutralMode(nMode);;
+    indexerTalon.setInverted(true);
   }
 
   public void arcadeDrive(double moveSpeed) {
-    indexerTalon.set(moveSpeed);
+    indexerTalon.set(moveSpeed  * IndexerConstants.indexerspeed);
   }
   
   public void safeStop() {

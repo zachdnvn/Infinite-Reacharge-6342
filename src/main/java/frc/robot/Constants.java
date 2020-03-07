@@ -31,4 +31,7 @@ public final class Constants {
     public static final class ShooterConstants{
         public static final double rollerspeed = 1.0;
     }
+    public static final class IndexerConstants{
+        public static final double indexerspeed = 0.25;
+    }
 }
