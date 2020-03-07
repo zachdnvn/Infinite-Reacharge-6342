@@ -7,9 +7,12 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -23,6 +26,10 @@ public class Drivetrain extends SubsystemBase {
   WPI_TalonFX rightFrontTalon;
   WPI_TalonFX rightBackTalon;
 
+  Orchestra m_orchestra;
+  ArrayList<WPI_TalonFX> m_band;
+  String song = "ImperialMarch.chrp";
+
   NeutralMode nMode = NeutralMode.Coast;
 
   DifferentialDrive differentialDrive;
@@ -30,6 +37,8 @@ public class Drivetrain extends SubsystemBase {
   DoubleSolenoid m_gearShiftSolenoid;
 
   Boolean currentGear = true; // CHANGE THIS BASED ON THE GEAR YOU ARE STARTING ON
+
+  Boolean isPaused = false;
 
   public Drivetrain() {
 
@@ -40,6 +49,14 @@ public class Drivetrain extends SubsystemBase {
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
+
+    m_band = new ArrayList<WPI_TalonFX>();
+    m_band.add(leftFrontTalon);
+    m_band.add(leftBackTalon);
+    m_band.add(rightFrontTalon);
+    m_band.add(rightBackTalon);
+
+    m_orchestra = new Orchestra(m_band);
 
     differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 
@@ -61,6 +78,20 @@ public class Drivetrain extends SubsystemBase {
     // Back Right
     rightBackTalon.clearStickyFaults();
     rightBackTalon.configFactoryDefault();
+  }
+
+  public void loadSong() {
+    m_orchestra.loadMusic(song);
+  }
+
+  public void play_play_Song() {
+    isPaused = !isPaused;
+    if(isPaused == true) {
+      m_orchestra.play();
+    }
+    else{
+      m_orchestra.pause();
+    }
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
