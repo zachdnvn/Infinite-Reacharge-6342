@@ -10,42 +10,37 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ShooterConstants;
 
-public class Shooter extends SubsystemBase {
-  WPI_TalonSRX leftShooterTalon;
-  WPI_TalonSRX rightShooterTalon;
+public class Indexer extends SubsystemBase {
+
+  WPI_TalonSRX indexerTalon;
 
   NeutralMode nMode = NeutralMode.Brake;
 
-  public Shooter() {
+  DifferentialDrive differentialDrive;
 
-    leftShooterTalon = new WPI_TalonSRX(14);
-    rightShooterTalon = new WPI_TalonSRX(15);
+  DoubleSolenoid m_gearShiftSolenoid;
 
+  public Indexer() {
+    indexerTalon = new WPI_TalonSRX(16);
   }
 
-  public void initTalons(){
-    // Left Shooter Talon
-    leftShooterTalon.clearStickyFaults();
-    leftShooterTalon.configFactoryDefault();
-    leftShooterTalon.setNeutralMode(nMode);
-    leftShooterTalon.setInverted(true);
-    // Right Shooter Talon
-    rightShooterTalon.clearStickyFaults();
-    rightShooterTalon.configFactoryDefault();
-    rightShooterTalon.setNeutralMode(nMode);
+  public void initTalons() {
+    // Front Left
+    indexerTalon.clearStickyFaults();
+    indexerTalon.configFactoryDefault();
+    indexerTalon.setNeutralMode(nMode);;
   }
 
-  public void shoot(){
-    rightShooterTalon.set(ShooterConstants.rollerspeed);
-    leftShooterTalon.set(ShooterConstants.rollerspeed * -1);
+  public void arcadeDrive(double moveSpeed) {
+    indexerTalon.set(moveSpeed);
   }
+  
   public void safeStop() {
-    leftShooterTalon.set(ControlMode.PercentOutput, 0);
-    rightShooterTalon.set(ControlMode.PercentOutput, 0);
+    indexerTalon.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

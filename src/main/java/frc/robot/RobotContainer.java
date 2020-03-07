@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -18,9 +17,11 @@ import frc.robot.Constants.OI;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.driveArcade;
+import frc.robot.commands.operateIndexer;
 import frc.robot.commands.shiftGears;
 import frc.robot.commands.shoot;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
@@ -30,10 +31,7 @@ public class RobotContainer {
   private final Drivetrain m_robotDrive = new Drivetrain();
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
-
-//Comands
-//  private final Command IntakeIn = new IntakeIn(m_intake);
-//  private final Command IntakeOut = new IntakeOut(m_intake);
+  private final Indexer m_indexer = new Indexer();
 
 //Joysticks
   public XboxController m_driveJoystick = new XboxController(OI.kDriverControllerPort); 
@@ -41,16 +39,17 @@ public class RobotContainer {
 
 
   public RobotContainer() {
-
-    //Configure Button Bindings
     configureButtonBindings();
-
-    //Default Commands
-
+    
     //Default Drivetrain Command
     m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
     ()->m_driveJoystick.getY(Hand.kLeft),
     ()->m_driveJoystick.getX(Hand.kRight)) 
+    );
+
+    //Default Indexer Command
+    m_indexer.setDefaultCommand(new operateIndexer(m_indexer,
+    ()->m_operatorJoystick.getY(Hand.kLeft))
     );
   }
 
@@ -61,15 +60,13 @@ public class RobotContainer {
     new JoystickButton(m_operatorJoystick, Button.kA.value)
       .whileHeld(new IntakeOut(m_intake));
       
-    new JoystickButton(m_driveJoystick, Button.kBumperRight.value) // CHANGE BUTTON NUMBER AS NEEDED
+    new JoystickButton(m_driveJoystick, Button.kBumperRight.value)
     .whenReleased(new shiftGears(m_robotDrive));
 
-    new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
-    .whenHeld(new shoot(m_shooter));
+    new JoystickButton(m_operatorJoystick, Button.kA.value)
+    .toggleWhenPressed(new shoot(m_shooter));
 
-    // new JoystickButton(m_operatorJoystick, Button.kBumperRight.value)
-    //   .whileHeld(new InstantCommand(m_intake::IntakeOut, m_intake));
-  }
+   }
 
 public Command getAutonomousCommand() {
 	return null;
