@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OI;
-import frc.robot.commands.ImperialMarch;
 import frc.robot.commands.IntakeIn;
 import frc.robot.commands.IntakeOut;
 import frc.robot.commands.driveArcade;
@@ -66,10 +65,6 @@ public class RobotContainer {
 
     new JoystickButton(m_operatorJoystick, Button.kA.value)
     .toggleWhenPressed(new shoot(m_shooter));
-
-    new JoystickButton(m_operatorJoystick, Button.kB.value)
-    .whenPressed(new ImperialMarch(m_robotDrive));
-
    }
 
 public Command getAutonomousCommand() {
