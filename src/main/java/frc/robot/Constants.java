@@ -17,19 +17,19 @@ package frc.robot;
  */
 public final class Constants {
     public static final class DriveConstants {
-        public static final double speedscalar = 1.0;
-        public static final double rotatescalar = 1.0;
+        public static final double speedscalar = 0.75;
+        public static final double rotatescalar = 0.85;
         public static final int pcmshifter = 0;
     }
     public static final class IntakeConstants{
-        public static final double rollerspeed = 1.0;
+        public static final double rollerspeed = 0.75;
     }
     public static final class OI {
         public static final int kDriverControllerPort = 0;
 		public static final int kOperatorControllerPort = 1;
     }
     public static final class ShooterConstants{
-        public static final double rollerspeed = 1.0;
+        public static final double rollerspeed = 1.00;
     }
     public static final class IndexerConstants{
         public static final double indexerspeed = 1;
