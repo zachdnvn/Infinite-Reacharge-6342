@@ -76,8 +76,16 @@ public class Drivetrain extends SubsystemBase {
     rightBackTalon.configFactoryDefault();
   }
 
-  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
-    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+  public void arcadeDrive(double translation, double rotation) {
+    
+    double leftOutput = translation + rotation;
+    double rightOutput = translation - rotation;
+
+    leftOutput = (Math.abs(leftOutput) > 1) ? 1 : leftOutput;
+    rightOutput = (Math.abs(rightOutput) > 1) ? 1 : rightOutput;
+
+    leftFrontTalon.set(ControlMode.PercentOutput, leftOutput);
+    rightFrontTalon.set(ControlMode.PercentOutput, rightOutput);
   }
   
   public void changeGear() {
