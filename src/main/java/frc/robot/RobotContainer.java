@@ -20,6 +20,7 @@ import frc.robot.commands.driveArcade;
 import frc.robot.commands.operateIndexer;
 import frc.robot.commands.shiftGears;
 import frc.robot.commands.shoot;
+import frc.robot.commands.toggleIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
@@ -63,8 +64,11 @@ public class RobotContainer {
     new JoystickButton(m_driveJoystick, Button.kBumperRight.value)
     .whenReleased(new shiftGears(m_robotDrive));
 
-    new JoystickButton(m_operatorJoystick, Button.kA.value)
+    new JoystickButton(m_operatorJoystick, Button.kB.value)
     .toggleWhenPressed(new shoot(m_shooter));
+
+    new JoystickButton(m_driveJoystick, Button.kBumperLeft.value)
+    .whenReleased(new toggleIntake(m_intake));
    }
 
 public Command getAutonomousCommand() {

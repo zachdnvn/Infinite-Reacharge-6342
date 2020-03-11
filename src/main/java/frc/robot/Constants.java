@@ -32,6 +32,6 @@ public final class Constants {
         public static final double rollerspeed = 1.0;
     }
     public static final class IndexerConstants{
-        public static final double indexerspeed = 0.25;
+        public static final double indexerspeed = 1;
     }
 }

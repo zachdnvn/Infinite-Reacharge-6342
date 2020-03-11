@@ -22,7 +22,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     intakeTalon = new WPI_TalonSRX(9);
-    m_intake_Solenoid = new DoubleSolenoid(3,5);
+    m_intake_Solenoid = new DoubleSolenoid(2,3);
   }
 
   public void changeIntake() {

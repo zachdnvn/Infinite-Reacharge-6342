@@ -40,10 +40,10 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
 
-    leftFrontTalon = new WPI_TalonFX(10);
-    leftBackTalon = new WPI_TalonFX(11);
-    rightFrontTalon = new WPI_TalonFX(12);
-    rightBackTalon = new WPI_TalonFX(13);
+    leftFrontTalon = new WPI_TalonFX(12);
+    leftBackTalon = new WPI_TalonFX(13);
+    rightFrontTalon = new WPI_TalonFX(10);
+    rightBackTalon = new WPI_TalonFX(11);
 
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
@@ -56,7 +56,7 @@ public class Drivetrain extends SubsystemBase {
 
     differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 
-    m_gearShiftSolenoid = new DoubleSolenoid(1,2);
+    m_gearShiftSolenoid = new DoubleSolenoid(0,1);
   }
 
   public void initTalons() {
