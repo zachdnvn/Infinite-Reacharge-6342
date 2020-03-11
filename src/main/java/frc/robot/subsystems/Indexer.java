@@ -41,7 +41,7 @@ public class Indexer extends SubsystemBase {
   }
   
   public void indexerIdle(){
-    indexerTalon.set(IndexerConstants.idlespeed);
+    indexerTalon.set(ControlMode.PercentOutput, IndexerConstants.idlespeed);
   }
   
   public void safeStop() {

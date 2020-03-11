@@ -56,13 +56,13 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    new JoystickButton(m_operatorJoystick, Button.kY.value)
+    new JoystickButton(m_operatorJoystick, Button.kA.value)
       .whileHeld(new IntakeIn(m_intake));
 
-      new JoystickButton(m_operatorJoystick, Button.kY.value)
+      new JoystickButton(m_operatorJoystick, Button.kA.value)
       .whileHeld(new IndexerIdle(m_indexer));
 
-    new JoystickButton(m_operatorJoystick, Button.kA.value)
+    new JoystickButton(m_operatorJoystick, Button.kY.value)
       .whileHeld(new IntakeOut(m_intake));
       
     new JoystickButton(m_driveJoystick, Button.kBumperRight.value)
