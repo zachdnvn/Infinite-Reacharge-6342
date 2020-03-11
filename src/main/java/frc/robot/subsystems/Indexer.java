@@ -40,6 +40,10 @@ public class Indexer extends SubsystemBase {
     indexerTalon.set(moveSpeed  * IndexerConstants.indexerspeed);
   }
   
+  public void indexerIdle(){
+    indexerTalon.set(IndexerConstants.idlespeed);
+  }
+  
   public void safeStop() {
     indexerTalon.set(ControlMode.PercentOutput, 0);
   }
