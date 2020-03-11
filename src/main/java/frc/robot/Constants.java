@@ -33,6 +33,6 @@ public final class Constants {
     }
     public static final class IndexerConstants{
         public static final double indexerspeed = 1;
-        public static final double idlespeed = 0.35;
+        public static final double idlespeed = 0.25;
     }
 }
