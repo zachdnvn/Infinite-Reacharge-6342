@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import java.util.ArrayList;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -24,9 +22,6 @@ public class Drivetrain extends SubsystemBase {
   WPI_TalonFX leftBackTalon;
   WPI_TalonFX rightFrontTalon;
   WPI_TalonFX rightBackTalon;
-
-  ArrayList<WPI_TalonFX> m_band;
-  String song = "ImperialMarch.chrp";
 
   NeutralMode nMode = NeutralMode.Coast;
 
@@ -48,12 +43,6 @@ public class Drivetrain extends SubsystemBase {
     leftBackTalon.follow(leftFrontTalon);
     rightBackTalon.follow(rightFrontTalon);
 
-    m_band = new ArrayList<WPI_TalonFX>();
-    m_band.add(leftFrontTalon);
-    m_band.add(leftBackTalon);
-    m_band.add(rightFrontTalon);
-    m_band.add(rightBackTalon);
-
     differentialDrive = new DifferentialDrive(leftFrontTalon, rightFrontTalon);
 
     m_gearShiftSolenoid = new DoubleSolenoid(0,1);
@@ -64,30 +53,28 @@ public class Drivetrain extends SubsystemBase {
     leftFrontTalon.clearStickyFaults();
     leftFrontTalon.configFactoryDefault();
     leftFrontTalon.setNeutralMode(nMode);
+    leftFrontTalon.enableVoltageCompensation(true);
     // Front Right
     rightFrontTalon.clearStickyFaults();
     rightFrontTalon.configFactoryDefault();
     rightFrontTalon.setNeutralMode(nMode);
+    rightFrontTalon.enableVoltageCompensation(true);
     // Back Left
     leftBackTalon.clearStickyFaults();
     leftBackTalon.configFactoryDefault();
+    leftBackTalon.setNeutralMode(nMode);
+    leftBackTalon.enableVoltageCompensation(true);
     // Back Right
     rightBackTalon.clearStickyFaults();
     rightBackTalon.configFactoryDefault();
+    rightBackTalon.setNeutralMode(nMode);
+    rightBackTalon.enableVoltageCompensation(true);
   }
 
-  public void arcadeDrive(double translation, double rotation) {
+  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
+  }
     
-    double leftOutput = translation + rotation;
-    double rightOutput = translation - rotation;
-
-    leftOutput = (Math.abs(leftOutput) > 1) ? 1 : leftOutput;
-    rightOutput = (Math.abs(rightOutput) > 1) ? 1 : rightOutput;
-
-    leftFrontTalon.set(ControlMode.PercentOutput, leftOutput);
-    rightFrontTalon.set(ControlMode.PercentOutput, rightOutput);
-  }
-  
   public void changeGear() {
     currentGear = !currentGear;
     if(currentGear == true) {
