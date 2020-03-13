@@ -18,7 +18,7 @@ package frc.robot;
 public final class Constants {
     public static final class DriveConstants {
         public static final double speedscalar = 0.75;
-        public static final double rotatescalar = 0.50;
+        public static final double rotatescalar = 0.70;
         public static final int pcmshifter = 0;
     }
     public static final class IntakeConstants{

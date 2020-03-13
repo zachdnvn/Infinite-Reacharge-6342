@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.cameraserver.CameraServer;
+
 import frc.robot.Constants.OI;
 import frc.robot.commands.IndexerIdle;
 import frc.robot.commands.IntakeIn;
@@ -42,7 +44,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureButtonBindings();
-    
+    CameraServer.getInstance().startAutomaticCapture();
     //Default Drivetrain Command
     m_robotDrive.setDefaultCommand(new driveArcade(m_robotDrive,
     ()->m_driveJoystick.getY(Hand.kLeft),
